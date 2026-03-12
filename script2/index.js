@@ -14,15 +14,21 @@ function isPrime(n) {
 }
 
 rl.question('Enter a number: ', (input) => {
-  const num = parseInt(input);
-  if (isNaN(num)) {
-    console.log('Invalid input — please enter a whole number.');
-  } else if (num < 2) {
-    console.log(`${num} is not a prime number.`);
-  } else if (isPrime(num)) {
-    console.log(`${num} is a prime number!`);
-  } else {
-    console.log(`${num} is not a prime number.`);
+  try {
+    const num = parseInt(input);
+    if (isNaN(num)) {
+      console.log('Invalid input — please enter a whole number.');
+    } else if (num < 2) {
+      console.log(`${num} is not a prime number.`);
+    } else if (isPrime(num)) {
+      console.log(`${num} is a prime number!`);
+    } else {
+      console.log(`${num} is not a prime number.`);
+    }
+  } catch (err) {
+    console.error(`Unexpected error: ${err?.message ?? err}`);
+    process.exitCode = 1;
+  } finally {
+    rl.close();
   }
-  rl.close();
 });
